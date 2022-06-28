@@ -1,4 +1,5 @@
-ResetOnSpace: ; The program stops taking whatever was written before a space into consideration, unless that space is removed after not too many extra strokes
+ResetOnSpace:
 0
 ResetOnDelete:
 0
+------------SETTINGS END------------
