@@ -1,0 +1,4 @@
+ResetOnSpace: ; The program stops taking whatever was written before a space into consideration, unless that space is removed after not too many extra strokes
+0
+ResetOnDelete:
+0
