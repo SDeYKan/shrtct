@@ -1,5 +1,17 @@
-ResetOnSpace:
+ResetOnSpace:Enabled=Instantly deletes your latest strokes when space is pressed, Disabled=Deletes history only when more text is written after pressing space.
 0
-ResetOnDelete:
+ResetOnDelete:Enabled=Instantly deletes key history when a letter is deleted, Disabled=Accounts for the deleted letters within the word in order to not loose the history.
 0
+ConfirmBeforePaste:Enabled=A "confirm key" needs to be pressed after the keyword is written before something gets pasted, Disabled=Instantly recognize a compatible word as keyword, instantly paste the content.
+0
+ConfirmKey:If Confirm Before Paste is enabled, this key will be the "confirm key".
+"Tab"
+FontSize:Size of the text from main menu
+12
+PasteMethod:0=Keep current clipboard, 1=Keep pasted text as clipboard, 2=Delete clipboard
+0
+PasteDelay(ms):Only if Confirm Before Paste is disabled, you can choose the time the program will take to paste the text after a keyword is recognized. Could give the user time to rectify.
+0
+Statistics:(Experimental) Keep track of the frequency and number of times a shortcut is used. 0=Disabled, 1=Enabled
+0 
 ------------SETTINGS END------------
