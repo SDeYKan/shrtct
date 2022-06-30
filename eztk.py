@@ -1,10 +1,9 @@
-from cgitb import text
+# DEPENDENCIES
 import tkinter as tk
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
 
 class eztk:
-    # MAIN WINDOW
     class place():
         def place(self, object, x, y, side, p):
             # Place is the default method for an easy xy coords object placements
@@ -20,6 +19,7 @@ class eztk:
             else:
                 print('Invalid placement argument. Leave black for "place", write "grid" or "pack" to change placement methods.')
                 return 2
+    # MAIN WINDOW
     class mkwindow():
         def __init__(self, title="tk", size="300x300"):
             self.root = Tk()
@@ -108,9 +108,10 @@ class eztk:
             def __init__(self, master_menu, submenu):
                 master_menu.submenus[submenu].add_separator()
 
+# Testing
+
 def stuff(button):
     print(button.getvar())
-# Temporary
 def main():
     main = eztk.mkwindow(title="Main2")
     button = eztk.mkbutton(main, "Print", command=lambda: stuff(label), p="pack", side="right")
