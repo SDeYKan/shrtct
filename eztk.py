@@ -1,10 +1,10 @@
 # DEPENDENCIES
 import tkinter as tk
+from tkinter import ttk
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
-from turtle import right
 
-# todo: add treeview, add separator, add labelframe, add notebook, add messagebox(if useful)
+# todo: add treeview, add separator, add messagebox(if useful)
 
 class place():
     def place(self, object, x, y, side):
@@ -43,26 +43,26 @@ class mktoplevel():
 # PLAIN TEXT
 class mklabel(place):
     def __init__(self, parent, text="Sample", x=0, y=0, side=""):
-        self.object = tk.Label(parent.root, text=text)
+        self.object = tk.Label(parent, text=text)
         self.place(self.object, x, y, side)
 # SMALL INPUT BOX
 class mkentry(place):
     def __init__(self, parent, x=0, y=0, side=""):
         self.variable = StringVar()
-        self.object = tk.Entry(parent.root, textvariable=self.variable)
+        self.object = tk.Entry(parent, textvariable=self.variable)
         self.place(self.object, x, y, side)
     def getvar(self):
         return self.variable.get()
 # SIMPLE BUTTON
 class mkbutton(place):
     def __init__(self, parent, text="", width=15, height=1, command="", x=0, y=0, side=""):
-        self.object = tk.Button(parent.root, text=text, width=width, height=height, command=command)
+        self.object = tk.Button(parent, text=text, width=width, height=height, command=command)
         self.place(self.object, x, y, side)
 # CHECKBOX
 class mkcheck(place):
     def __init__(self, parent, text="Sample", x=0, y=0, side=""):
         self.variable = IntVar()
-        self.object = tk.Checkbutton(parent.root, text=text, variable=self.variable)
+        self.object = tk.Checkbutton(parent, text=text, variable=self.variable)
         self.place(self.object, x, y, side)
     def getvar(self):
         return self.variable.get()
@@ -75,7 +75,7 @@ class mkradiobuttons(place):
     def addbuttons(self, parent, names=["example"], x=0, y=2, side="", clearx=0, cleary=20, background="#FFFFFF", activebackground="#FFFFFF"):
         list(names)
         for i in range(len(names)):
-            self.buttons[names[i]] = tk.Radiobutton(parent.root, text=names[i], variable=self.variable, value=self.lastposition, bg=background, activebackground=activebackground)
+            self.buttons[names[i]] = tk.Radiobutton(parent, text=names[i], variable=self.variable, value=self.lastposition, bg=background, activebackground=activebackground)
             self.place(self.buttons[names[i]], x+clearx*i, y+cleary*i, side=side)
             self.lastposition += 1
     def getvar(self):
@@ -83,7 +83,7 @@ class mkradiobuttons(place):
 # LIST
 class mklistbox(place):
     def __init__(self, parent, width=80, height=150, x=0, y=0, side="", background="#FFFFFF"):
-        self.object = tk.Listbox(parent.root, width=width, height=height, bg=background)
+        self.object = tk.Listbox(parent, width=width, height=height, bg=background)
         self.object.bind("<<ListboxSelect>>", lambda x: self.getvar())
         self.place(self.object, x, y, side)
         self.lastposition = 0
@@ -109,31 +109,43 @@ class mklistbox(place):
 # BIG INPUT BOX
 class mktextbox(place):
     def __init__(self, parent, x=0, y=0, width=50, height=50, side=""):
-        self.object = Text(parent.root, width=width, height=height)
+        self.object = Text(parent, width=width, height=height)
         self.place(self.object, x, y, side)
     def getvar(self):
         return self.object.get("1.0","end-1c")
 # BIG INPUT BOX WITH SCROLL BAR
 class mkscrolledtextbox(place):
     def __init__(self, parent, x=0, y=0, width=50, height=50, side=""):
-        self.object = ScrolledText(parent.root, width=width, height=height)
+        self.object = ScrolledText(parent, width=width, height=height)
         self.place(self.object, x, y, side)
     def getvar(self):
         return self.object.get("1.0","end-1c")
 # TOP MENU
-class topmenu():
+class ezmenus():
     class mktopmenu():
         def __init__(self, parent):
-            self.submenus = {}
-            self.menu = tk.Menu()
-            parent.root.config(menu=self.menu)
+            self.object = tk.Menu()
+            parent.config(menu=self.object)
     class mkentry():
         def __init__(self, master_menu, name):
-            master_menu.submenus[name] = tk.Menu()
-            master_menu.menu.add_cascade(label=name, menu=master_menu.submenus[name])
+            self.object = tk.Menu()
+            master_menu.add_cascade(label=name, menu=self.object)
     class mkoption():
-        def __init__(self, master_menu, submenu, name, command=""):
-            master_menu.submenus[submenu].add_command(label=name, command=command)
+        def __init__(self, parent, name, command=""):
+            parent.add_command(label=name, command=command)
     class mkseparator():
-        def __init__(self, master_menu, submenu):
-            master_menu.submenus[submenu].add_separator()
+        def __init__(self, parent):
+            parent.add_separator()
+class eznotebooks():
+    class mknotebook(place):
+        def __init__(self, parent, x=0, y=0, side=""):
+            self.object = ttk.Notebook(parent)
+            self.place(self.object, x, y, side)
+    class mktab():
+        def __init__(self, parent, name, width, height):
+            self.object = ttk.Frame(parent, width=width, height=height)
+            parent.add(self.object, text=name)
+class mklabelframe(place):
+    def __init__(self, parent, name, width, height, x=0, y=0, side=""):
+        self.object = ttk.Labelframe(parent, text=name, width=width, height=height)
+        self.place(self.object, x, y, side)
